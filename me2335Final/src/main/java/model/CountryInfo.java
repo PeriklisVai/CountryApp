@@ -1,5 +1,7 @@
 package model;
 
+import model.restcountries.CountryResult;
+
 public class CountryInfo {
 	
 	private final String name;
@@ -23,6 +25,15 @@ public class CountryInfo {
 
 
 	//Result Constructor
+
+
+	public CountryInfo(CountryResult countryResult) {
+		this.name = countryResult.getCountryName().toString();
+		this.capital = countryResult.getCapitalName().toString();
+		this.currency = countryResult.getCurrencies().toString();
+		this.population = countryResult.getPopulation();
+		this.continent = countryResult.toString();
+	}
 
 
 	public String getName() {

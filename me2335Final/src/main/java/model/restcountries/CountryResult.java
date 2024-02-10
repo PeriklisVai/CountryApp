@@ -11,22 +11,65 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CountryResult {
 	
 	@JsonProperty("name")
-	public Name countryName;
+	private Name countryName;
 	@JsonProperty("currencies")
-	public Map<String, Currency> currencies;
+	private Map<String, Currency> currencies;
 	@JsonProperty("capital")
-	public List<String> capitalName;
+	private List<String> capitalName;
 	@JsonProperty("population")
-	public int population;
+	private int population;
 	@JsonProperty("continents")
-	public List<String> continents;
+	private List<String> continents;
 	
-	@Override
-	public String toString(){
-		String objString = String.format("Name: %s\nNative Name: %s\nCurrencies: %s\nCapital: %s"
-				+ "\nPopulation: %d\nContinents: %s", countryName.toString(), countryName.getNativeNameString(), 
-				getCurrenciesString(), capitalName.toString() ,population, continents.toString());
-		return objString;
+	
+	@JsonProperty("name")
+	public Name getCountryName() {
+		return countryName;
+	}
+
+	@JsonProperty("name")
+	public void setCountryName(Name countryName) {
+		this.countryName = countryName;
+	}
+
+	@JsonProperty("currencies")
+	public Map<String, Currency> getCurrencies() {
+		return currencies;
+	}
+
+	@JsonProperty("currencies")
+	public void setCurrencies(Map<String, Currency> currencies) {
+		this.currencies = currencies;
+	}
+
+	@JsonProperty("capital")
+	public List<String> getCapitalName() {
+		return capitalName;
+	}
+
+	@JsonProperty("capital")
+	public void setCapitalName(List<String> capitalName) {
+		this.capitalName = capitalName;
+	}
+
+	@JsonProperty("continents")
+	public List<String> getContinents() {
+		return continents;
+	}
+
+	@JsonProperty("continents")
+	public void setContinents(List<String> continents) {
+		this.continents = continents;
+	}
+
+	@JsonProperty("population")
+	public int getPopulation() {
+		return population;
+	}
+
+	@JsonProperty("population")
+	public void setPopulation(int population) {
+		this.population = population;
 	}
 	
 	public String getCurrenciesString() {
@@ -36,5 +79,13 @@ public class CountryResult {
         	formattedString.append(String.format("Key: %s, Value: %s\n", entry.getKey(), entry.getValue()));
         }
 		return formattedString.toString();
+	}
+	
+	@Override
+	public String toString(){
+		String objString = String.format("Name: %s\nNative Name: %s\nCurrencies: %s\nCapital: %s"
+				+ "\nPopulation: %d\nContinents: %s", countryName.toString(), countryName.getNativeNameString(), 
+				getCurrenciesString(), capitalName.toString() ,population, continents.toString());
+		return objString;
 	}
 }

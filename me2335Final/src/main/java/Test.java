@@ -13,7 +13,8 @@ public class Test {
 				
 		ObjectMapper mapper = new ObjectMapper();
 		List<CountryResult> countryResults = mapper.readValue(jsonString, new TypeReference<List<CountryResult>>(){});
-		System.out.println(countryResults.get(0).toString());
+		
+		//System.out.println(countryResults.get(0).toString());
 	}
 
 }
