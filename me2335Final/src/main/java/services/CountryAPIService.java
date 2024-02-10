@@ -15,6 +15,8 @@ import org.apache.http.HttpResponse;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpStatus;
 import org.apache.http.client.methods.CloseableHttpResponse;
@@ -26,6 +28,9 @@ import model.restcountries.CountryResult;
 import model.restcountries.ErrorResponse;
 
 public class CountryAPIService {
+	
+	private static final Logger logger = LogManager.getLogger();
+	
 	private final String API_URL;
 
 	public enum SearchMode {
@@ -49,7 +54,6 @@ public class CountryAPIService {
 	// 4. Ανάκτηση λίστας χωρών που χρησιμοποιούν ένα συγκεκριμένο νόμισμα (π.χ.
 	// ευρώ).
 	// https://restcountries.com/v3.1/currency/{currency}
-
 	public List<CountryInfo> countrySearch(SearchMode searchMode, String searchValue) throws CountryAPIException {
 		String apiFunction = null;
 		String returnedFields = "name,capital,currencies,continents,population";// fields to be returned
@@ -127,6 +131,8 @@ public class CountryAPIService {
 				List<CountryResult> countryResults = mapper.readValue(entity.getContent(),
 						new TypeReference<List<CountryResult>>() {
 						});
+				logger.info("API call completed!");
+				logger.info("API Result: " + countryResults);
 				return countryResults;
 			} catch (IOException e) {
 				throw new CountryAPIException("Error during the http request", e);

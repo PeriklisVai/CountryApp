@@ -9,9 +9,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Name {
 	@JsonProperty("official")
-	public String official;
+	private String official;
 	@JsonProperty("common")
-	public String common;
+	private String common;
 	@JsonProperty("nativeName")
 	private Map<String, Name> nativeName;
 	
@@ -28,7 +28,7 @@ public class Name {
 		try {	
 			// Iterate over the map entries and print each key-value pair
 	        for (Map.Entry<String, Name> entry : nativeName.entrySet()) {
-	        	formattedString.append(String.format("Key: %s, Value: %s\n", entry.getKey(), entry.getValue()));
+	        	formattedString.append(String.format("%s: %s\n", entry.getKey(), entry.getValue()));
 	        }
 		}
 		catch (NullPointerException e)
@@ -36,5 +36,35 @@ public class Name {
 			return null;
 		}
 		return formattedString.toString();
+	}
+
+	@JsonProperty("official")
+	public String getOfficial() {
+		return official;
+	}
+
+	@JsonProperty("official")
+	public void setOfficial(String official) {
+		this.official = official;
+	}
+
+	@JsonProperty("common")
+	public String getCommon() {
+		return common;
+	}
+
+	@JsonProperty("common")
+	public void setCommon(String common) {
+		this.common = common;
+	}
+
+	@JsonProperty("nativeName")
+	public Map<String, Name> getNativeName() {
+		return nativeName;
+	}
+
+	@JsonProperty("nativeName")
+	public void setNativeName(Map<String, Name> nativeName) {
+		this.nativeName = nativeName;
 	}
 }

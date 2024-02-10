@@ -1,72 +1,78 @@
 package model;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import model.restcountries.CountryResult;
 
 public class CountryInfo {
 	
-	private final String name;
+	private static final Logger logger = LogManager.getLogger();
 	
-	private final String capital;
+	private final String nameCommon;
+	private final String nameOfficial;
 	
-	private final String currency;
+	private final String capital;//concatenated if more than one, comma separated
+	
+	private final String currencies;//concatenated currency format: name(symbol),name(symbol)
 	
 	private final int population;
 	
 	private final String continent;
 	
-	public CountryInfo(String name, String capital, String currency, int population, String continent) {
+	public CountryInfo(String nameCommon,String nameOfficial, String capital, String currencies, int population, String continent) {
 		super();
-		this.name = name;
+		this.nameCommon = nameCommon;
+		this.nameOfficial = nameOfficial;
 		this.capital = capital;
-		this.currency = currency;
+		this.currencies = currencies;
 		this.population = population;
 		this.continent = continent;
 	}
 
-
 	//Result Constructor
-
-
 	public CountryInfo(CountryResult countryResult) {
-		this.name = countryResult.getCountryName().toString();
-		this.capital = countryResult.getCapitalName().toString();
-		this.currency = countryResult.getCurrencies().toString();
+		this.nameCommon = countryResult.getCountryName().getCommon();
+		this.nameOfficial = countryResult.getCountryName().getOfficial();
+		this.capital = countryResult.getCapitalNameString();
+		this.currencies = countryResult.getCurrenciesInfoString();
 		this.population = countryResult.getPopulation();
-		this.continent = countryResult.toString();
+		this.continent = countryResult.getContinentString();
+		
+		logger.info("Country info retrieved: " + this.nameCommon);
+	}
+	
+	public String getNameCommon() {
+		return nameCommon;
 	}
 
-
-	public String getName() {
-		return name;
+	public String getNameOfficial() {
+		return nameOfficial;
 	}
-
 
 	public String getCapital() {
 		return capital;
 	}
 
-
-	public String getCurrency() {
-		return currency;
+	public String getCurrencies() {
+		return currencies;
 	}
-
 
 	public int getPopulation() {
 		return population;
 	}
 
-
 	public String getContinent() {
 		return continent;
 	}
-	
+
 	//toString
 	@Override
 	public String toString()
 	{
-		String objString = String.format("Country: %s,\nCapital: %s"
+		String objString = String.format("Country: %s\nCapital: %s"
 				+ "\nCurrency: %s\nPopulation: %d"
-				+ "\nContinent: %s", name, capital, currency, population, continent);
+				+ "\nContinent: %s\n", nameCommon, capital, currencies, population, continent);
 		return objString;
 	}
 }
