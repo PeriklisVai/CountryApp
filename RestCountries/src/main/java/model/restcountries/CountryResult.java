@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-//TODO: Search for JsonInclude.Include.NON_NULL
+//POJO class for json deserialization
 public class CountryResult {
 	private static final Logger logger = LogManager.getLogger();
 	
@@ -76,15 +76,6 @@ public class CountryResult {
 		this.population = population;
 	}
 	
-	public String getCurrenciesString() {
-		StringBuilder formattedString = new StringBuilder();
-		// Iterate over the map entries and print each key-value pair
-        for (Map.Entry<String, Currency> entry : currencies.entrySet()) {
-        	formattedString.append(String.format("%s: %s\n", entry.getKey(), entry.getValue()));
-        }
-		return formattedString.toString();
-	}
-	
 	public String getCurrenciesInfoString() {
 		StringBuilder formattedString = new StringBuilder();
 
@@ -93,7 +84,8 @@ public class CountryResult {
 		
 		// Iterate over the map entries and print concatenate value pair
         for (Map.Entry<String, Currency> entry : currencies.entrySet()) {
-        	String formattedCurrency = String.format("%s(%s)",entry.getValue().getName(), entry.getValue().getSymbol());
+        	String formattedCurrency = String.format("%s(%s)",entry.getValue().getName(), 
+        			entry.getValue().getSymbol());
         	formattedString.append(formattedCurrency);
         	
         	// If it's not the last entry, append a comma and space
@@ -121,14 +113,4 @@ public class CountryResult {
 		String concatenatedContinents = String.join(", ", this.continents);
 		return concatenatedContinents;
 	}
-	
-	/*
-	@Override
-	public String toString(){
-		String objString = String.format("Name: %s\nNative Name: %s\nCurrencies: %s\nCapital: %s"
-				+ "\nPopulation: %d\nContinents: %s", countryName.toString(), countryName.getNativeNameString(), 
-				getCurrenciesString(), getCapitalNameString() ,population, continents.toString());
-		return objString;
-	}
-	*/
 }

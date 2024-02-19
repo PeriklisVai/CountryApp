@@ -1,5 +1,6 @@
 package exception;
 
+//We define this class and use it to wrap all API errors
 public class CountryAPIException extends Exception{
 	
 	public CountryAPIException() {

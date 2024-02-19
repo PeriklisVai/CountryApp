@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import exception.CountryAPIException;
 import model.CountryInfo;
+import services.CountryAPI;
 import services.CountryAPIService;
 import services.CountryAPIService.SearchMode;
 
@@ -21,7 +22,7 @@ public class CountryAPITest {
 	@Test
 	public void testSearchMode() throws CountryAPIException{
 		final CountryAPIService countryService = CountryAPI.getCountryDBService();
-		final List<CountryInfo> results = countryService.countrySearch(SearchMode.NAME, "Russia");//try different mode and values
+		final List<CountryInfo> results = countryService.countrySearch(SearchMode.ALL, "Russia");//try different mode and values
 		Assert.assertFalse(results.isEmpty());
 		results.forEach(System.out::println);
 	}

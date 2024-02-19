@@ -1,5 +1,7 @@
 package model;
 
+import java.text.DecimalFormat;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -66,6 +68,16 @@ public class CountryInfo {
 		return continent;
 	}
 
+	/*
+	private String getFormattedInt(int population) {
+		// Create a DecimalFormat with pattern "###,###"
+        DecimalFormat formatter = new DecimalFormat("###,###");
+        
+        // Format the number using the DecimalFormat
+        String formattedNumber = formatter.format(population);
+        return formattedNumber;
+	}*/
+	
 	//toString
 	@Override
 	public String toString()

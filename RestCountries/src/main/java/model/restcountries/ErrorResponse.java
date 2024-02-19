@@ -14,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
     "status",
     "message"
 })
+//Used for json error deserialization
 public class ErrorResponse {
 
     @JsonProperty("status")
